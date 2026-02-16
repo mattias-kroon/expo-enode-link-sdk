@@ -7,6 +7,7 @@ type ResultCode =
   | "malformedLinkToken"
   | "dismissedViaDismissFunction"
   | "cancelledByUser"
+  | "USER_INTERACTION"
   | "backendError"
   | "earlyExitRequestedFromFrontend"
   | "permissionError"
