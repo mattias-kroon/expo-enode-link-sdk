@@ -1,6 +1,37 @@
 # expo-enode-link-sdk
 
-An Expo Module integration for Enode's Link SDK
+An Expo Module integration for Enode's Link SDK.
+
+> **This is a fork** of [YoussefHenna/expo-enode-link-sdk](https://github.com/YoussefHenna/expo-enode-link-sdk),
+> maintained so the bundled native Enode SDKs can be kept current and so the
+> fixes ABRP previously carried as `patch-package` entries live in source.
+
+## Bundled native SDK versions
+
+The two platforms are versioned independently by Enode, so these numbers do not
+track each other or this package's version.
+
+| Platform | Enode SDK | Source |
+| --- | --- | --- |
+| iOS | **LinkKit 1.0.12** (build 28, min iOS 13.1) | `ios/Frameworks/LinkKit.xcframework`, committed binary from [enode/enode-link-ios](https://github.com/enode/enode-link-ios) tag `1.0.12` |
+| Android | **io.enode:linkkit 1.0.8** | Maven Central, declared in `android/build.gradle` |
+
+**To update iOS:** check out the desired tag of `enode/enode-link-ios`, replace
+`ios/Frameworks/LinkKit.xcframework` wholesale, and diff the
+`arm64-apple-ios.swiftinterface` inside it against the previous one to catch API
+changes. Confirm the version afterwards with:
+
+```sh
+plutil -p ios/Frameworks/LinkKit.xcframework/ios-arm64/LinkKit.framework/Info.plist \
+  | grep -E 'ShortVersion|MinimumOS'
+```
+
+`LinkKit.linkKitVersion()` reports the same string at runtime, which is the only
+way to be sure of what actually shipped in a build.
+
+**To update Android:** bump the `io.enode:linkkit` version in
+`android/build.gradle`. Latest available versions are listed at
+[repo1.maven.org/maven2/io/enode/linkkit](https://repo1.maven.org/maven2/io/enode/linkkit/).
 
 ## Android
 

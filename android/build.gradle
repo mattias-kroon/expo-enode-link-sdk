@@ -59,10 +59,12 @@ android {
       sourceCompatibility JavaVersion.VERSION_11
       targetCompatibility JavaVersion.VERSION_11
     }
+  }
 
-    kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_11.majorVersion
-    }
+  // Kept outside the AGP < 8 branch: on AGP 8+ the Kotlin and Java targets must
+  // agree, and expo-modules-core compiles at 17.
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_17.majorVersion
   }
 
   namespace "expo.modules.enodelinksdk"
@@ -89,5 +91,5 @@ repositories {
 dependencies {
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
-  implementation("io.enode:linkkit:1.0.4")
+  implementation("io.enode:linkkit:1.0.8")
 }
