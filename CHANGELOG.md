@@ -49,3 +49,15 @@ These three were previously carried in ABRP as
 
 - README now records which native SDK versions are bundled and how to update
   each platform.
+
+## 1.1.1 — make git installs actually work
+
+- **Commit `build/`** (the compiled TypeScript that `main`/`types` point at) and
+  un-ignore the root `build/` in `.gitignore`, leaving `android/build/` and
+  `example/ios/build/` ignored.
+- **Remove the `prepare` script.** `expo-module prepare` runs
+  `expo-module-clean` before rebuilding, so on a git install it deleted `build/`
+  and then failed — no devDependencies present, and it also tries to build the
+  `plugin/` directory, which has no tsconfig. The result was a package with no
+  `build/` at all and an unresolvable `main`. Use `yarn build` after editing
+  `src/` and commit the output.

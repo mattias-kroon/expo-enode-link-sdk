@@ -9,6 +9,12 @@ jsconfig.json
 # Xcode
 #
 build/
+# ...but NOT the root build/ directory: that is the compiled TypeScript that
+# package.json points `main` and `types` at. Consumers install this package from
+# a git URL rather than npm, and the `prepare` script that would compile it does
+# not reliably run for git dependencies (nor on EAS), so the output is committed.
+# Regenerate with `yarn build` after changing anything under src/.
+!/build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3

@@ -1,0 +1,1 @@
+{"version":3,"file":"ExpoEnodeLinkSDKModule.web.js","sourceRoot":"","sources":["../src/ExpoEnodeLinkSDKModule.web.ts"],"names":[],"mappings":"AAAA,eAAe;IACb,IAAI;QACF,OAAO,CAAC,IAAI,CAAC,6CAA6C,CAAC,CAAC;IAC9D,CAAC;CACF,CAAC","sourcesContent":["export default {\n  show() {\n    console.warn(\"expo-enode-link-sdk is not supported on web\");\n  },\n};\n"]}

@@ -6,6 +6,21 @@ An Expo Module integration for Enode's Link SDK.
 > maintained so the bundled native Enode SDKs can be kept current and so the
 > fixes ABRP previously carried as `patch-package` entries live in source.
 
+## Why `build/` is committed
+
+This package is consumed from a git URL, not from npm, and `package.json` points
+`main`/`types` at `build/` — compiled TypeScript that npm would normally produce
+at publish time. The `prepare` script that did that has been **removed**, because
+`expo-module prepare` runs `expo-module-clean` before rebuilding: on a git
+install it deleted `build/` and then failed (no devDependencies present, and it
+also tries to build the `plugin/` directory, which has no tsconfig), leaving the
+consumer with no `build/` at all.
+
+So the compiled output is committed instead. **After changing anything under
+`src/`, run `yarn build` and commit the resulting `build/`.** Note the root
+`build/` is deliberately un-ignored in `.gitignore` while `android/build/` and
+`example/ios/build/` stay ignored.
+
 ## Bundled native SDK versions
 
 The two platforms are versioned independently by Enode, so these numbers do not
